@@ -146,7 +146,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Surat Tugas</span>
-                <span class="info-box-number">10</span>
+                <span class="info-box-number">{{$surat4}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -159,50 +159,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Surat Keterangan</span>
-                <span class="info-box-number">41</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-
-          <!-- fix for small devices only -->
-          <div class="clearfix hidden-md-up"></div>
-
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-envelope"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Surat Undangan</span>
-                <span class="info-box-number">76</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-envelope"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Surat Berita Acara</span>
-                <span class="info-box-number">2</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-envelope"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Surat Personalia</span>
-                <span class="info-box-number">20</span>
+                <span class="info-box-number">{{$surat2}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>

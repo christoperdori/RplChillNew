@@ -125,7 +125,7 @@ class SuratController extends Controller
 
     public function hapus($id) {
         $surat = SuratKeluar::find($id);
-        $surat->remove();
+        $surat->delete();
         return redirect('suratKeluar');
     }
 

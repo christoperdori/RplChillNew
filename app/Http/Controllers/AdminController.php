@@ -13,7 +13,12 @@ class AdminController extends Controller
 {
      
     public function index() {
-        return view('admin.home');
+        $surat1 = SuratKeluar::where('jenis','Surat Tugas')->count();
+        $surat2 = SuratKeluar::where('jenis','Surat Keterangan')->count();
+        $surat3 = SuratKeluar::where('jenis','Surat Personalia')->count();
+        $surat4 = SuratKeluar::where('jenis','Surat Undangan')->count();
+        $surat5 = SuratKeluar::where('jenis','Surat Berita')->count();
+        return view('admin.home', compact('surat1','surat2','surat3','surat4','surat5'));
     }
 
     public function valid($id) {

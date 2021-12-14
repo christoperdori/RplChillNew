@@ -146,7 +146,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Surat Tugas</span>
-                <span class="info-box-number">10</span>
+                <span class="info-box-number">{{$surat4}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -159,7 +159,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Surat Keterangan</span>
-                <span class="info-box-number">41</span>
+                <span class="info-box-number">{{$surat2}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -176,7 +176,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Surat Undangan</span>
-                <span class="info-box-number">76</span>
+                <span class="info-box-number">{{$surat3}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -189,7 +189,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Surat Berita Acara</span>
-                <span class="info-box-number">2</span>
+                <span class="info-box-number">{{$surat5}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -202,7 +202,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Surat Personalia</span>
-                <span class="info-box-number">20</span>
+                <span class="info-box-number">{{$surat1}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
