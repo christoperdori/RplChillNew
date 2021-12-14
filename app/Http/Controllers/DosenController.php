@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\DB;
 class DosenController extends Controller
 {
     
-    public function dashdosen()
-    {
-        return view('dashdosen');
+    public function index() {
+        return view('dosen.home');
     }
+
     public function arsipdosen()
     {
         return view('arsipdosen');
@@ -29,14 +29,7 @@ class DosenController extends Controller
     {
         return view('skdosen');
     }
-    public function index()
-    {
-    	
-    	$dosen = DB::table('dosen')->get();
- 
-    	
-    	return view('dosen',['dosen' => $dosen]);
-    }
+    
     public function tambah() {
         return view('buatsrtdosen');
     }

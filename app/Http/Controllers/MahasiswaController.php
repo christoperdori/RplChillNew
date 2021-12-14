@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
-    public function dashmhs()
-    {
-        return view('dashmhs');
+    public function index(){
+        return view('mahasiswa.home');
     }
+
     public function arsipmhs()
     {
         return view('arsipmhs');
@@ -28,14 +28,7 @@ class MahasiswaController extends Controller
     {
         return view('skmhs');
     }
-    public function index()
-    {
-    	
-    	$mahasiswa = DB::table('mahasiswa')->get();
- 
     
-    	return view('mahasiswa',['mahasiswa' => $mahasiswa]);
-    }
     public function tambah() {
         return view('buatsrtmhs');
     }

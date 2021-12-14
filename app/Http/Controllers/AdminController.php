@@ -5,77 +5,63 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use App\Models\SuratMasuk;
+use App\Models\SuratKeluar;
+use App\Models\User;
 
 class AdminController extends Controller
 {
      
-    public function dashadmin()
-    {
-        return view('dashadmin');
+    public function index() {
+        return view('admin.home');
     }
-    public function arsipadmin()
-    {
-        return view('arsipadmin');
-    }
-    public function profileadm()
-    {
-        return view('profileadm');
-    }
-    public function ksdosen()
-    {
-        return view('ksdosen');
-    }
-    public function ksmhs()
-    {
-        return view('ksmhs');
-    }
-    public function index()
-    {
-    	
-    	$admin = DB::table('admin')->get();
- 
-    
-    	return view('admin',['admin' => $admin]);
-    }
-    public function tambah() {
-        return view('buatsrtadmin');
-    }
-    public function buatsrtadmin(Request $request)
-    {
-	
-	DB::table('admin')->insert([
-		'tujuan_surat' => $request->tujuan_surat,
-		'tgl_pelaksanaan_kegiatan' => $request->tgl_pelaksanaan_kegiatan,
-		'nama_mitra' => $request->nama_mitra,
-		'alamat_mitra' => $request->alamat_mitra,
-        'keterangan' => $request->keterangan
-	]);
 
-	return redirect('/admin');
-}
-public function edit($id)
-{
-	$admin = DB::table('admin')->where('nik_admin',$id)->get();
-	return view('editadmin',['admin' => $admin]);
- 
-}
-public function update($id,Request $request)
-{
-	
-	DB::table('admin')->where('nik_admin',$request->id)->update([
-		'tujuan_surat' => $request->tujuan_surat,
-		'tgl_pelaksanaan_kegiatan' => $request->tgl_pelaksanaan_kegiatan,
-		'nama_mitra' => $request->nama_mitra,
-		'alamat_mitra' => $request->alamat_mitra,
-        'keterangan' => $request->keterangan
-	]);
-	return redirect('/admin');
-}
-public function hapus($id)
-{
-	
-	DB::table('admin')->where('nik_admin',$id)->delete();
-	return redirect('/admin');
-}
-}
+    public function valid($id) {
+        $srt = SuratMasuk::find($id);
+        $pejabat = User::where('role','dosen')->get();
+        return view('admin.valid', compact('srt','pejabat'));
+    }
 
+    public function simpanValid($id, REQUEST $request) {
+        $srt = SuratMasuk::find($id);
+        $surat1 = SuratKeluar::where('jenis','Surat Tugas')->count();
+        $surat2 = SuratKeluar::where('jenis','Surat Keterangan')->count();
+        $surat3 = SuratKeluar::where('jenis','Surat Personalia')->count();
+        $surat4 = SuratKeluar::where('jenis','Surat Undangan')->count();
+        $surat5 = SuratKeluar::where('jenis','Surat Berita')->count();
+        $valid = SuratMasuk::find($id);
+        if ($valid->suratkeluar->jenis=='Surat Tugas') {
+            $no = $surat1.'/D/FTI/'.date('Y');
+        }elseif ($valid->suratkeluar->jenis=='Surat Keterangan') {
+            $no = $surat2.'/B/FTI/'.date('Y');
+        }elseif ($valid->suratkeluar->jenis=='Surat Personalia') {
+            $no = $surat3.'/A/FTI/'.date('Y');
+        }elseif ($valid->suratkeluar->jenis=='Surat Undangan') {
+            $no = $surat4.'/C/FTI/'.date('Y');
+        }else {
+            $no = $surat5.'/E/FTI/'.date('Y');
+        }
+        if ($request->status=='Approved') {
+            $srt->no_surat = $no;
+            $srt->tanggal = date('Y-m-d');
+            $srt->status = $request->status;
+            $srt->id_dosen = $request->ttd;
+            $srt->save();
+        }else {
+            $srt->status = $request->status;
+            $srt->pesan = $request->pesan;
+            $srt->save();
+        }
+        return redirect('suratMasuk');
+    }
+
+    public function upload($id, REQUEST $request) {
+        $surat = SuratMasuk::find($id);
+        $srt = $request->file('surat');
+        $srtName = $surat->id . $srt->getClientOriginalName();
+        $srt->move('surat/',$srtName);
+        $surat->surat = $srtName;
+        $surat->save();
+        return redirect('suratKeluar');
+    }
+}

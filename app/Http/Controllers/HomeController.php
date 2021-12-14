@@ -27,16 +27,21 @@ class HomeController extends Controller
     public function index()
     {
         $role = Auth::user()->role;
-        if($role == "mahasiswa"){
-            return redirect('dashmhs');
+        if($role == "admin"){
+            return redirect()->to('admin');
         } else if($role == "dosen"){
-            return redirect('dashdosen');
-        } else if($role == "admin"){
-            return redirect('dashadmin');
-        }  
-        else {
+            return redirect()->to('dosen');
+        } else if($role == "mahasiswa"){
+            return redirect()->to('mahasiswa');
+        } else {
             return redirect()->to('logout');
         }
+    }
+
+    public function logout(Request $request) {
+        $request->session()->flush();
+        Auth::logout();
+        return Redirect('login');
     }
     
 }
